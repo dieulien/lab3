@@ -406,7 +406,7 @@ inequality. You may be accustomed to other operators, like, "==" and
 the Pervasives module can help explain why.)
 ......................................................................*)
 
-let find_parents (f : family) (per : person) : (person * person) option = 
+let find_parents = 
   fun _ -> failwith "find_parents not implemented" ;;
 
 
