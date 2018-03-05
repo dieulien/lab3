@@ -406,12 +406,8 @@ inequality. You may be accustomed to other operators, like, "==" and
 the Pervasives module can help explain why.)
 ......................................................................*)
 
-let find_parents (f : family) (n : string) : (person * person) option = 
-  
-  match f with
-  | Single _ -> None
-  | Family (p1, p2, flist) -> 
-  ;;
+let find_parents (f : family) (per : person) : (person * person) option = 
+  fun _ -> failwith "find_parents not implemented" ;;
 
 
 (*======================================================================
