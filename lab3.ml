@@ -450,8 +450,8 @@ edges.  The parameters you need to accept are, in order, the graph, a
 person and another person.
 ......................................................................*)
 
-let marry_graph (per1 : person) (per2 : person) : graph = 
-  [(per1, SpouseOf, per2); (per2, SpouseOf, per1)] ;;
+let marry_graph (g : graph) (per1 : person) (per2 : person) : graph = 
+  [(per1, SpouseOf, per2); (per2, SpouseOf, per1)] @ g ;;
 
 (*There are far fewer restrictions compared to our rigidly-defined
 tree structure with variants. For instance, using the revised
