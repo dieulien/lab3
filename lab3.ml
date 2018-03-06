@@ -123,7 +123,7 @@ exception Invalid_Color of string ;;
 let valid_rgb (c : color) : color =
   let bad (x : int) : bool = (x < 0 || x > 255) in
   match c with
-  | Simple x -> c
+  | Simple _ -> c
   | RGB (r, g, b) ->
      if bad r then raise (Invalid_Color "bad red channel")
      else if bad g then raise (Invalid_Color "bad green channel")
@@ -355,7 +355,7 @@ is already made up of a married couple?
 
 exception Family_Trouble of string ;;
 
-let marry (single1 : person) (fam : family) = 
+let marry (fam : family) (single1 : person) = 
        match fam with
       | Family _ -> raise (Family_Trouble 
         ("cannot marry"^ single1.name ^"to married couple"))
@@ -375,7 +375,7 @@ let add_to_family (fam1 : family) (fam2 : family) : family =
   | Single _ -> raise (Family_Trouble 
                        "cannot add fam as a child of a single") 
   | Family (par1, par2, children) -> 
-           Family (par1, par2, fam1 :: children) ;;
+           Family (par1, par2, fam2 :: children) ;;
 
 (*......................................................................
 Exercise 14: Complete the function below that counts the number of
