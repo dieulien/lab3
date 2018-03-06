@@ -450,8 +450,8 @@ edges.  The parameters you need to accept are, in order, the graph, a
 person and another person.
 ......................................................................*)
 
-let marry_graph = 
-  fun _ -> failwith "marry_graph not implemented" ;;
+let marry_graph (per1 : person) (per2 : person) : graph = 
+  [(per1, SpouseOf, per2); (per2, SpouseOf, per1)] ;;
 
 (*There are far fewer restrictions compared to our rigidly-defined
 tree structure with variants. For instance, using the revised
@@ -471,8 +471,11 @@ that includes the relationship whereby the third person is a child of
 the first two.
 ......................................................................*)
 
-let add_child_to_graph = 
-  fun _ -> failwith "add_child_to_graph not implemented" ;;
+let add_child_to_graph (g : graph) (c1 : person) (p1 : person) (p2 : person)
+                      : graph = 
+  g
+  |> List.cons (p1, ParentOf, c1)
+  |> List.cons (p2, ParentOf, c1) ;;
 
 (*......................................................................
 Exercise 18: Now, rewrite find_parents using this new graph form. Note
@@ -482,5 +485,12 @@ a string representing the name of the person whose parents you want
 to find, returning a person list for the parents.
 ......................................................................*)
 
-let find_parents_graph = 
-  fun _ -> failwith "find_parents_graph not implemented" ;;
+let find_parents_graph (g : graph) (n : string) : person list = 
+  let is_parent (_, rel, {name; _}) : bool =
+  match rel with
+  | ParentOf -> name = n
+  | SpouseOf -> false in
+g
+|> List.filter (fun x -> is_parent x)
+|> List.map (fun (pname, _, _) -> pname)
+;;
